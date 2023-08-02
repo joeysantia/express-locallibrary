@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/header') -%>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <%- include('partials/sidebar') -%>
+            </div>
+            <div class="col-sm-10">
+                <h1>Author: <%= author.name %></h1>
+                <p><%= author.lifespan %></p>
+                <div style="margin-left:20px;margin-top:20px">
+                    <h4>Books</h4>
+                    <dl>
+                        <% if (author_books.length > 0) { %>
+                            <% author_books.forEach(book => { %>
+                                <dt>
+                                    <a href=<%= book.url %>>
+                                        <%= book.title %>
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <%= book.summary %>
+                                </dd>
+                            <% }) %>
+                        <% } else { %>
+                            <p>This author has no books.</p>
+                        <% } %>
+                    </dl>
+                </div>
+                <hr>
+                <p>
+                    <a href=<%= author.url + '/delete' %>>
+                        Delete author
+                    </a>
+                </p>
+                <p>
+                    <a href=<%= author.url + '/update' %>>
+                        Update author
+                    </a>
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/header') -%>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <%- include('partials/sidebar') -%>
+            </div>
+            <div class="col-sm-10">
+                <h1><%= title %></h1>
+                <ul>
+                    <% if (bookinstance_list.length > 1) {%>
+                    <% bookinstance_list.forEach(bookinstance => { %>
+                        <%= console.log(bookinstance.status) %>
+                        <li>
+                            <a href=<%= bookinstance.url %>>
+                                <%= bookinstance.book.title %>: <%= bookinstance.imprint %></a> - 
+                                    <% if (bookinstance.status == 'Available') {%>
+                                        <span className="text-success"><%= bookinstance.status %></span>
+                                    <%  } else if (bookinstance.status == 'Maintenance') { %>
+                                        <span className="text-danger"><%= bookinstance.status %></span>
+                                    <% } else { %>
+                                        <span className="text-warning"><%= bookinstance.status %></span>
+                                    <% } %>
+                                    <% if (bookinstance.status !== 'Available') { %>
+                                        <span> (Due: <%= bookinstance.due_back_formatted %> )</span>
+                                <% }}) %>
+                    <% } else { %>
+                        <li>There are no book copies in this library</li>
+                    <% } %>
+                                        
+                            </a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

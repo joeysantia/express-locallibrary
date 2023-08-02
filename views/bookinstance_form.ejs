@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/header') -%>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <%- include('partials/sidebar') -%>
+            </div>
+            <div class="col-sm-10">
+                <h1>
+                    <%= title %>
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="book">
+                                Book
+                            </label>
+                            <select
+                                id="book"
+                                class="form-control"
+                                type="select"
+                                placeholder="Select book"
+                                name="book"
+                                required="true"
+                            >
+                                <% book_list.sort((a, b) => {
+                                    let textA = a.title.toUpperCase()
+                                    let textB = b.title.toUpperCase()
+                                    return textA - textB 
+                                }) %> 
+                                <% book_list.forEach(book => { %>
+                                    <option
+                                        value=<%= book._id %>
+                                        selected=<%= selected_book === book._id.toString() %>
+                                    >
+                                        <%= book.title %>
+                                    </option>
+                                <% }) %>   
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imprint">
+                                Imprint:
+                            </label>
+                            <input 
+                                id="imprint"
+                                class="form-control"
+                                typ="text"
+                                placeholder="Publisher and date information"
+                                name="imprint"
+                                required="true"
+                                value=<%= bookinstance ? bookinstance.imprint : '' %>
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="due_back">
+                                Date when book available:
+                            </label>
+                            <input 
+                                id="due_back"
+                                class="form-control"
+                                type="date"
+                                name="due_back"
+                                value=<%= bookinstance ? bookinstance.due_back_yyyy_mm_dd : '' %>
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="status">
+                                Status:
+                            </label>
+                            <select
+                                id="status"
+                                class="form-control"
+                                type="select"
+                                placeholder="Select status"
+                                name="status"
+                                required="true"
+                            >
+                                <option
+                                    value="Maintenance"
+                                    selected=<%= bookinstance ? bookinstance.status === 'Maintenance' : false %>
+                                >
+                                    Maintenance
+                                </option>
+                                <option
+                                    value="Available"
+                                    selected=<%= bookinstance ? bookinstance.status === 'Available' : false %>
+                                >
+                                    Available
+                                </option>
+                                <option
+                                    value="Loaned"
+                                    selected=<%= bookinstance ? bookinstance.status === 'Loaned' : false %>
+                                >
+                                    Loaned
+                                </option>
+                                <option
+                                    value="Reserved"
+                                    selected=<%= bookinstance ? bookinstance.status === 'Reserved' : false %>
+                                >
+                                    Reserved
+                                </option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Submit
+                        </button>
+                    </form>
+                    <% if (errors) { %>
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li>
+                                    <%= error.msg %>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    <% } %>
+                </h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -28,7 +28,7 @@ async function main() {
 
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 20
+  max: 40
 })
 
 app.use(limiter)

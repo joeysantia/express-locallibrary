@@ -62,6 +62,8 @@ const bookinstance_create_post = [
 
         const errors = validationResult(req)
 
+        console.log(req.body.due_back)
+
         const bookinstance = new BookInstance({
             book: req.body.book,
             imprint: req.body.imprint,
@@ -145,11 +147,13 @@ const bookinstance_update_post = [
 
         const errors = validationResult(req)
 
+
         const bookinstance = new BookInstance({
             book: req.body.book,
             imprint: req.body.imprint,
             status: req.body.status,
-            due_back: req.body.due_back
+            due_back: req.body.due_back,
+            _id: req.params.id
         })
 
         if (!errors.isEmpty()) {

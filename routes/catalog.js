@@ -40,8 +40,8 @@ router.post("/genre/create", genre_controller.genre_create_post);
 router.get("/genre/:id/delete", genre_controller.genre_delete_get);
 router.post("/genre/:id/delete", genre_controller.genre_delete_post);
 
-router.get("/genre/:id/update", author_controller.author_update_get);
-router.post("/genre/:id/update", author_controller.author_update_post);
+router.get("/genre/:id/update", genre_controller.genre_update_get);
+router.post("/genre/:id/update", genre_controller.genre_update_post);
 
 router.get("/genre/:id", genre_controller.genre_detail);
 

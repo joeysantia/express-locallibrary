@@ -100,7 +100,7 @@ const genre_delete_post = asyncHandler(async (req, res, next) => {
         })
         return
     } else {
-        Genre.findByIdAndDelete(req.body.genreid)
+        await Genre.findByIdAndDelete(req.body.genreid)
         res.redirect("/catalog/genres")
     }
 })
@@ -132,7 +132,8 @@ const genre_update_post = [
         const errors = validationResult(req)
 
         const genre = new Genre({
-            name: req.body.name
+            name: req.body.name,
+            _id: req.params.id
         })
 
         if (!errors.isEmpty()) {
